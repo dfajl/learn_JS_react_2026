@@ -1,135 +1,75 @@
-# learn_JS_react_2026
+# React + TypeScript + Vite
 
-Учебный репозиторий для прохождения [курса по React](https://learn.javascript.ru/courses/react) на [learn.javascript.ru](https://learn.javascript.ru).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Здесь хранятся домашние задания, практические упражнения и курсовой проект — сервис заказа еды из ресторанов.
+Currently, two official plugins are available:
 
-## О курсе
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-Интенсивный месячный курс по полному стеку React-разработки: от `useState` до RTK Query, от базового роутинга до оптимизаций рендеринга. На выходе — готовое SPA и понимание экосистемы React.
+## React Compiler
 
-**Формат:** вебинары 2 раза в неделю, домашние задания с code review, групповой чат, курсовой проект.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Предварительные требования
+## Expanding the ESLint configuration
 
-- HTML/CSS — базовые теги, позиционирование, margin/padding
-- Современный JavaScript (ES6+)
-- Git / GitHub — для обмена кодом (при необходимости даётся crash-курс)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Программа курса
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-### Блок 1 — Создание React-приложений
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-- Что такое React и зачем он нужен
-- Способы создания React-приложений
-- Элементы и функциональные компоненты
-- Хуки: `useState`, `useEffect`, `useReducer`, `useRef`, `useCallback`, `useMemo` и др.
-- Кастомные хуки
-- Базовая теория рендеринга
-- Работа с формами
-- Стили (CSS Modules)
-- Модальные окна и Portal
-
-### Блок 2 — Работа с данными
-
-- Организация данных в приложении
-- Context API
-- State managers и Redux
-- Проектирование слоя данных
-- Redux Toolkit (RTK)
-- Асинхронные запросы (thunk)
-- RTK Query
-
-### Блок 3 — SPA и роутинг
-
-- Роутинг в одностраничных приложениях
-- React Router: статические, динамические и вложенные маршруты
-- Навигация и редиректы
-- Параметры пути и query-параметры
-
-### Блок 4 — Продвинутый React
-
-- Рендеринг и Fiber
-- Оптимизация рендеринга
-- Паттерны в React
-- Suspense, lazy/dynamic imports
-- Оптимизация работы с данными
-
-## Курсовой проект
-
-**Сервис выбора ресторана и заказа еды** — SPA на:
-
-- React
-- Redux (Redux Toolkit)
-- React Router
-- Vite
-
-## Стек технологий
-
-| Технология      | Назначение                          |
-|-----------------|-------------------------------------|
-| React           | UI-библиотека                       |
-| Redux Toolkit   | Управление состоянием               |
-| RTK Query       | Запросы к API                       |
-| React Router    | Клиентский роутинг                  |
-| Vite            | Сборка и dev-сервер                 |
-| CSS Modules     | Стилизация компонентов              |
-
-## Структура репозитория
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 
 ```
-learn_JS_react_2026/
-├── README.md
-├── homework/          # домашние задания по блокам
-│   ├── block-1/
-│   ├── block-2/
-│   ├── block-3/
-│   └── block-4/
-└── course-project/    # курсовой проект (сервис заказа еды)
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+
 ```
-
-> Папки создаются по мере прохождения курса. Домашние задания можно оформлять отдельными ветками, например `HW-1`, `HW-2`.
-
-## Работа с ветками
-
-| Ветка   | Назначение                    |
-|---------|-------------------------------|
-| `main`  | Основная ветка                |
-| `HW-*`  | Домашние задания              |
-
-## Быстрый старт
-
-```bash
-# Клонировать репозиторий
-git clone <url-репозитория>
-cd learn_JS_react_2026
-
-# Создать React-приложение через Vite (когда дойдёте до практики)
-npm create vite@latest my-app -- --template react
-cd my-app
-npm install
-npm run dev
-```
-
-## Полезные ссылки
-
-- [Курс по React — learn.javascript.ru](https://learn.javascript.ru/courses/react)
-- [Современный учебник JavaScript](https://learn.javascript.ru/)
-- [Документация React](https://react.dev/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
-- [React Router](https://reactrouter.com/)
-- [Vite](https://vite.dev/)
-
-## Цели обучения
-
-После прохождения курса вы сможете:
-
-- создавать современные SPA на React;
-- управлять состоянием через Context, Redux и RTK Query;
-- настраивать роутинг и навигацию;
-- понимать, как работает рендеринг React, и оптимизировать его;
-- проектировать структуру production-приложения.
-
----
-
-*2026 · Учебный репозиторий для курса [learn.javascript.ru](https://learn.javascript.ru/courses/react)*
