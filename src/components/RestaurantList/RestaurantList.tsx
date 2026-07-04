@@ -8,10 +8,12 @@ export const RestaurantList = () => {
 			<h1>Restaurants List</h1>
 			<ul>
 				{restaurants.map((restaurant: TRestaurant) => (
-					<RestaurantItem
-						key={restaurant.id}
-						restaurant={restaurant}
-					/>
+					<li key={restaurant.id}>
+						<RestaurantItem
+						   key={restaurant.id}
+						   restaurant={restaurant}
+					    />
+					</li>
 				))}
 			</ul>
 		</div>
