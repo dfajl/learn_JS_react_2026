@@ -1,4 +1,4 @@
-import { restaurants } from "../../mock/restaurantsList.js";
+import { restaurants } from "../../mock/restaurantsList.ts";
 import { RestaurantItem } from "./RestaurantItem/RestaurantItem.tsx";
 import type { TRestaurant } from "./types.ts";
 
