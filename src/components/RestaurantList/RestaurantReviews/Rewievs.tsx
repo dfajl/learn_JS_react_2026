@@ -1,4 +1,4 @@
-import type { TReviewItem } from "../types.ts";
+import type { TReviewItem } from "../restaurantTypes.ts";
 import { ReviewItem } from "./ReviewItem.tsx";
 export const Reviews = ({ reviews, style }: { reviews: TReviewItem[], style: React.CSSProperties }) => {
 	return (

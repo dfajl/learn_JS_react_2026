@@ -1,4 +1,4 @@
-import type { TMenuItem } from "../types";
+import type { TMenuItem } from "../restaurantTypes.ts";
 import { MenuItem } from "./MenuItem.tsx";
 
 export const Menus = ({ menu, style }: { menu: TMenuItem[], style: React.CSSProperties }) => {

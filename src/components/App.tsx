@@ -1,6 +1,6 @@
 import { MainFooter } from "./Footer/MainFooter.tsx";
 import { MainHeader } from "./Header/MainHeader.tsx";
-import { RestaurantList } from "./RestaurantList/RestaurantList.tsx";
+import { RestaurantsPage } from "./RestaurantList/RestaurantsPage.tsx";
 
 export const App = () => {
 	return (
@@ -14,7 +14,7 @@ export const App = () => {
 				height: "50px"
 			}}/>
 			<main>
-				<RestaurantList />
+				<RestaurantsPage />
 			</main>
 			<MainFooter style={{
 				border: "1px solid black",

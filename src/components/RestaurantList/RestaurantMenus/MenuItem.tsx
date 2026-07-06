@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TMenuItem } from "../types.ts";
+import type { TMenuItem } from "../restaurantTypes.ts";
 import { Counter } from "../../UI/Counter/UICounter.tsx";
 
 export const MenuItem = ({ menuItem }: { menuItem: TMenuItem }) => {
