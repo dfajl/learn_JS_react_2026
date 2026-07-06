@@ -8,8 +8,8 @@ export const RestaurantItem = ({ restaurant }: { restaurant: TRestaurant }) => {
 			<h2 style={{ textDecoration: "underline" }}>
 				Name: {restaurant.name}
 			</h2>
-			<Menus menu={restaurant.menu} />
-			<Reviews reviews={restaurant.reviews} />
+			<Menus menu={restaurant.menu}  style={{ fontSize: "1.2rem" }}/>
+			<Reviews reviews={restaurant.reviews} style={{ fontSize: "1.2rem" }}/>
 		</div>
 	);
 };
