@@ -1,4 +1,4 @@
-import type { TRestaurant } from "../types.ts";
+import type { TRestaurant } from "../restaurantTypes.ts";
 import { Menus } from "../RestaurantMenus/Menus.tsx";
 import { Reviews } from "../RestaurantReviews/Rewievs.tsx";
 
@@ -8,8 +8,8 @@ export const RestaurantItem = ({ restaurant }: { restaurant: TRestaurant }) => {
 			<h2 style={{ textDecoration: "underline" }}>
 				Name: {restaurant.name}
 			</h2>
-			<Menus menu={restaurant.menu} />
-			<Reviews reviews={restaurant.reviews} />
+			<Menus menu={restaurant.menu}  style={{ fontSize: "20px" }}/>
+			<Reviews reviews={restaurant.reviews} style={{ fontSize: "20px" }}/>
 		</div>
 	);
 };

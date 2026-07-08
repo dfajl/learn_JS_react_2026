@@ -1,9 +1,9 @@
-import type { TMenuItem } from "../types";
+import type { TMenuItem } from "../restaurantTypes.ts";
 import { MenuItem } from "./MenuItem.tsx";
 
-export const Menus = ({ menu }: { menu: TMenuItem[] }) => {
+export const Menus = ({ menu, style }: { menu: TMenuItem[], style: React.CSSProperties }) => {
 	return (
-		<div>
+		<div style={style}>
 			<h3 style={{ color: "blue" }}>Menu</h3>
 			<ul>
 				{menu.map((menuItem: TMenuItem) => (

@@ -1,4 +1,4 @@
-import type { TReviewItem } from "../types";
+import type { TReviewItem } from "../restaurantTypes";
 
 export const ReviewItem = ({ review }: { review: TReviewItem }) => {
 	return (
