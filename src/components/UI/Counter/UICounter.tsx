@@ -5,20 +5,23 @@ export const Counter = ({
 	onChange,
 	min = 0,
 	max = 5,
+	textAdd = "Increase",
+	textRemove = "Decrease",
 }: TCounterProps) => {
 	return (
 		<div>
 			{count > min && (
 				<>
-					<button onClick={() => onChange(count - 1)}>Remove one</button>
+					<button type="button" onClick={() => onChange(count - 1)}>{textRemove}</button>
 					<div>{count}</div>
 				</>
 			)}
 			<button
+				type="button"
 				disabled={count >= max}
 				onClick={() => onChange(count + 1)}
 			>
-				Add one
+				{textAdd}
 			</button>
 		</div>
 	);

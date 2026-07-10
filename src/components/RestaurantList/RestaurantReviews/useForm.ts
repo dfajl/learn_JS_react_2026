@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import type { TReviewFormAction, TReviewFormState } from "./types";
 
 const INITIAL_STATE: TReviewFormState = {
@@ -25,10 +25,19 @@ const reducer = (state: TReviewFormState, action: TReviewFormAction): TReviewFor
 export const useForm = () => {
 	const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-	const setName = (value: string) => dispatch({ type: "SET_NAME", payload: value });
-	const setText = (value: string) => dispatch({ type: "SET_TEXT", payload: value });
-	const setRating = (value: number) => dispatch({ type: "SET_RATING", payload: value });
-	const clear = () => dispatch({ type: "CLEAR" });
+	const setName = useCallback(
+		(value: string) => dispatch({ type: "SET_NAME", payload: value }),
+		[],
+	);
+	const setText = useCallback(
+		(value: string) => dispatch({ type: "SET_TEXT", payload: value }),
+		[],
+	);
+	const setRating = useCallback(
+		(value: number) => dispatch({ type: "SET_RATING", payload: value }),
+		[],
+	);
+	const clear = useCallback(() => dispatch({ type: "CLEAR" }), []);
 
 	return { form, setName, setText, setRating, clear };
 };
