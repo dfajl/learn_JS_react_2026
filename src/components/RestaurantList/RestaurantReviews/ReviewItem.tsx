@@ -1,9 +1,10 @@
 import type { TReviewItem } from "../restaurantTypes";
+import styles from "./ReviewItem.module.css";
 
 export const ReviewItem = ({ review }: { review: TReviewItem }) => {
 	return (
-		<li key={review.id}>
-			{review.text}
+		<li className={styles.item}>
+			<p className={styles.text}>{review.text}</p>
 		</li>
 	);
 };

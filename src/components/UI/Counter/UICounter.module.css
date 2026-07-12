@@ -1,0 +1,12 @@
+.counter {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.count {
+	min-width: 24px;
+	text-align: center;
+	font-weight: 600;
+	color: #1e293b;
+}

@@ -1,9 +1,10 @@
 import { ProgressBar } from "../UI/ProgressBar/UIProgressBar.tsx";
+import styles from "./MainHeader.module.css";
 
-export const MainHeader = ({ style }: { style: React.CSSProperties }) => {
+export const MainHeader = () => {
 	return (
-		<header style={style}>
-			<h2>Header</h2>
+		<header className={styles.header}>
+			<h2 className={styles.title}>Header</h2>
 			<ProgressBar color="red" />
 		</header>
 	);

@@ -1,7 +1,9 @@
-export const MainFooter = ({ style }: { style: React.CSSProperties }) => {
+import styles from "./MainFooter.module.css";
+
+export const MainFooter = () => {
 	return (
-		<footer style={style}>
-			<h2>Footer</h2>
+		<footer className={styles.footer}>
+			<h2 className={styles.title}>Footer</h2>
 		</footer>
 	);
 };

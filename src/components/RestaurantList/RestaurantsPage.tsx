@@ -3,6 +3,7 @@ import { restaurants } from "../../mock/restaurantsList.ts";
 import { Tabs } from "../UI/Tabs/Tabs.tsx";
 import { RestaurantItem } from "./RestaurantItem/RestaurantItem.tsx";
 import type { TRestaurant } from "./restaurantTypes.ts";
+import styles from "./RestaurantsPage.module.css";
 
 export const RestaurantsPage = () => {
 	const [activeRestaurantId, setActiveRestaurantId] = useState<string | null>(
@@ -26,20 +27,14 @@ export const RestaurantsPage = () => {
 	};
 
 	return (
-		<div>
-			<h1>Current Restaurant</h1>
+		<div className={styles.page}>
+			<h1 className={styles.title}>Current Restaurant</h1>
 			<Tabs
 				items={restaurantTabs}
 				activeId={activeRestaurantId}
-				style={{
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					gap: "10px",
-				}}
 				onChange={handleSetActiveRestaurantId}
 			/>
-			{currentRestaurant && <RestaurantItem restaurant={currentRestaurant}/>}
+			{currentRestaurant && <RestaurantItem restaurant={currentRestaurant} />}
 		</div>
 	);
 };

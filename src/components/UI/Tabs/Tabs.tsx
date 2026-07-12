@@ -1,24 +1,22 @@
+import { UIButton } from "../Button/UIButton.tsx";
 import type { TTabsProps } from "./types.ts";
+import styles from "./Tabs.module.css";
 
-export const Tabs = ({ items, activeId, onChange, style }: TTabsProps) => {
+export const Tabs = ({ items, activeId, onChange }: TTabsProps) => {
 	return (
-		<div role="tablist" style={style}>
+		<div role="tablist" className={styles.tablist}>
 			{items.map((item) => (
-				<button
+				<UIButton
 					key={item.id}
-					type="button"
+					size="medium"
+					color="neutral"
+					active={item.id === activeId}
 					role="tab"
 					aria-selected={item.id === activeId}
-					style={{
-						padding: "10px",
-						fontSize: "16px",
-						backgroundColor:
-							item.id === activeId ? "rgba(135, 207, 235, 0.645)" : "",
-					}}
 					onClick={() => onChange(item.id)}
 				>
 					{item.label}
-				</button>
+				</UIButton>
 			))}
 		</div>
 	);
