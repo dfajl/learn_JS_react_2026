@@ -1,14 +1,10 @@
-import { useState } from "react";
 import type { TMenuItem } from "../restaurantTypes.ts";
-import { Counter } from "../../UI/Counter/UICounter.tsx";
+import { DishCounter } from "./DishCounter.tsx";
 
 export const MenuItem = ({ menuItem }: { menuItem: TMenuItem }) => {
-	const [count, setCount] = useState(0);
-
 	return (
 		<li>
-			{menuItem.name} — {menuItem.price * count} ₽
-			<Counter count={count} onChange={setCount} />
+			{menuItem.name} — <DishCounter menuItem={menuItem} />
 		</li>
 	);
 };

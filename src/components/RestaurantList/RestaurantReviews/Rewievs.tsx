@@ -1,5 +1,6 @@
 import type { TReviewItem } from "../restaurantTypes.ts";
 import { ReviewItem } from "./ReviewItem.tsx";
+import { ReviewForm } from "./ReviewForm.tsx";
 export const Reviews = ({ reviews, style }: { reviews: TReviewItem[], style: React.CSSProperties }) => {
 	return (
 		<div style={style}>
@@ -11,6 +12,7 @@ export const Reviews = ({ reviews, style }: { reviews: TReviewItem[], style: Rea
 					<ReviewItem key={review.id} review={review} />
 				))}
 			</ul>
+			<ReviewForm />
 		</div>
 	);
 };
