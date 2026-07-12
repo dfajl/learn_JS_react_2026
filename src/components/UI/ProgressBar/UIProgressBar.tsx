@@ -1,7 +1,9 @@
+import { useScrollProgress } from "../../../hooks/useScrollProgress.ts";
 import type { TProgressBarProps } from "./types.ts";
 
-export const ProgressBar = ({ width, color }: TProgressBarProps) => {
-	const fillWidth = typeof width === "number" ? `${width}%` : width;
+export const ProgressBar = ({ color }: TProgressBarProps) => {
+	const scrollProgress = useScrollProgress();
+	const fillWidth = `${scrollProgress}%`;
 
 	return (
 		<div
