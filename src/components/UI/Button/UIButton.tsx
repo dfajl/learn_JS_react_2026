@@ -1,6 +1,7 @@
 import cn from "classnames";
 import type { TUIButtonProps } from "./types.ts";
 import styles from "./UIButton.module.css";
+import { useTheme } from "../../Providers/ThemeProvider";
 
 export const UIButton = ({
 	children,
@@ -10,13 +11,16 @@ export const UIButton = ({
 	className,
 	type = "button",
 	...props
-}: TUIButtonProps) => {	return (
+}: TUIButtonProps) => {
+	const { theme } = useTheme();
+	return (
 		<button
 			type={type}
 			className={cn(
 				styles.button,
 				styles[size],
 				styles[color],
+				styles[theme],
 				{
 					[styles.active]: active,
 				},

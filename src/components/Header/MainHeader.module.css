@@ -1,4 +1,5 @@
 .header {
+	position: relative;
 	border: 1px solid #d0d7de;
 	padding: 10px 16px;
 	display: flex;
@@ -13,4 +14,11 @@
 	font-size: 1.125rem;
 	font-weight: 600;
 	color: #1a1a2e;
+}
+
+.switch {
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
 }
