@@ -16,6 +16,13 @@
 	color: #1a1a2e;
 }
 
+.auth {
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
 .switch {
 	position: absolute;
 	right: 16px;
