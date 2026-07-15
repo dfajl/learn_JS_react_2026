@@ -1,0 +1,16 @@
+.footer {
+	border: 1px solid #d0d7de;
+	padding: 10px 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	background-color: #ffffff;
+	margin-top: auto;
+}
+
+.title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #1a1a2e;
+}

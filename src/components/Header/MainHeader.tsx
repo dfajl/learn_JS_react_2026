@@ -1,9 +1,18 @@
 import { ProgressBar } from "../UI/ProgressBar/UIProgressBar.tsx";
+import { ThemeSwitch } from "../Providers/ThemeProvider";
+import { UserAuthControls } from "../Providers/UserProvider";
+import styles from "./MainHeader.module.css";
 
-export const MainHeader = ({ style }: { style: React.CSSProperties }) => {
+export const MainHeader = () => {
 	return (
-		<header style={style}>
-			<h2>Header</h2>
+		<header className={styles.header}>
+			<div className={styles.auth}>
+				<UserAuthControls />
+			</div>
+			<h2 className={styles.title}>Header</h2>
+			<div className={styles.switch}>
+				<ThemeSwitch />
+			</div>
 			<ProgressBar color="red" />
 		</header>
 	);

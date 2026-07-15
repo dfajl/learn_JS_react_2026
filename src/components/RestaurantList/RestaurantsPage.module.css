@@ -1,0 +1,12 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.title {
+	font-size: 1.75rem;
+	font-weight: 700;
+	text-align: center;
+	color: #1a1a2e;
+}

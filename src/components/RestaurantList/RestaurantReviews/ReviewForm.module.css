@@ -1,0 +1,56 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 24px;
+	margin-top: 8px;
+	background-color: #f1f5f9;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: 100px 1fr;
+	align-items: center;
+	gap: 16px 24px;
+}
+
+.rowTop {
+	align-items: start;
+}
+
+.label {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #475569;
+	text-align: right;
+}
+
+.input,
+.textarea {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #cbd5e1;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+
+.input:focus,
+.textarea:focus {
+	outline: 2px solid #93c5fd;
+	border-color: #3b82f6;
+}
+
+.textarea {
+	min-height: 80px;
+	resize: vertical;
+}
+
+.actions {
+	display: flex;
+	justify-content: center;
+	padding-top: 8px;
+	margin-top: 4px;
+	border-top: 1px solid #e2e8f0;
+}

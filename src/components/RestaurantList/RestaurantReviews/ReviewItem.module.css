@@ -1,0 +1,12 @@
+.item {
+	padding: 12px 16px;
+	background-color: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	font-size: 1rem;
+	color: #475569;
+}
+
+.text {
+	line-height: 1.4;
+}
