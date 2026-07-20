@@ -4,6 +4,7 @@ import { ReduxProvider } from "./Providers/ReduxProvider";
 import { MainFooter } from "./Footer/MainFooter.tsx";
 import { MainHeader } from "./Header/MainHeader.tsx";
 import { RestaurantsPage } from "./RestaurantList/RestaurantsPage.tsx";
+import { CartContainer } from "./Cart/CartContainer.tsx";
 import styles from "./App.module.css";
 
 export const App = () => {
@@ -14,6 +15,7 @@ export const App = () => {
 					<div className={styles.app}>
 						<MainHeader />
 						<main className={styles.main}>
+							<CartContainer />
 							<RestaurantsPage />
 						</main>
 						<MainFooter />
