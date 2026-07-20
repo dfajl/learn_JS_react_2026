@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type { TMenuItem } from "../restaurantTypes.ts";
+import type { TDish } from "../restaurantTypes.ts";
 import { Counter } from "../../UI/Counter/UICounter.tsx";
 import styles from "./DishCounter.module.css";
 
-export const DishCounter = ({ menuItem }: { menuItem: TMenuItem }) => {
+export const DishCounter = ({ menuItem }: { menuItem: TDish }) => {
 	const [count, setCount] = useState(0);
 
 	return (

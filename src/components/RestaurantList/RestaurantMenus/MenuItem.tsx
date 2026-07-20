@@ -1,9 +1,9 @@
-import type { TMenuItem } from "../restaurantTypes.ts";
+import type { TDish } from "../restaurantTypes.ts";
 import { useUser } from "../../Providers/UserProvider";
 import { DishCounter } from "./DishCounter.tsx";
 import styles from "./MenuItem.module.css";
 
-export const MenuItem = ({ menuItem }: { menuItem: TMenuItem }) => {
+export const MenuItem = ({ menuItem }: { menuItem: TDish }) => {
 	const { user } = useUser();
 
 	return (

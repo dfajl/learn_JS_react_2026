@@ -1,20 +1,30 @@
 export type TRestaurant = {
 	id: string;
 	name: string;
-	menu: TMenuItem[];
-	reviews: TReviewItem[];
+	menu: string[];
+	reviews: string[];
 };
 
-export type TMenuItem = {
+export type TDish = {
 	id: string;
 	name: string;
 	price: number;
 	ingredients: string[];
 };
 
-export type TReviewItem = {
+export type TReview = {
 	id: string;
-	user: string;
+	userId: string;
 	text: string;
 	rating: number;
+};
+
+export type TUser = {
+	id: string;
+	name: string;
+};
+
+export type TEntitiesState<T> = {
+	entities: Record<string, T>;
+	ids: string[];
 };

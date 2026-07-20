@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { restaurants } from "../../mock/restaurantsList.ts";
 import { Tabs } from "../UI/Tabs/Tabs.tsx";
-import { RestaurantItem } from "./RestaurantItem/RestaurantItem.tsx";
-import type { TRestaurant } from "./restaurantTypes.ts";
+import { RestaurantContainer } from "./RestaurantItem/RestaurantContainer.tsx";
+import { useAppSelector } from "../../store/hooks.ts";
+import {
+	selectRestaurantIds,
+	selectRestaurants,
+} from "../../store/entities/restaurant/slice.ts";
 import styles from "./RestaurantsPage.module.css";
 
 export const RestaurantsPage = () => {
-	const [activeRestaurantId, setActiveRestaurantId] = useState<string | null>(
-		() => restaurants[0]?.id ?? null,
-	);
+	const restaurantIds = useAppSelector(selectRestaurantIds);
+	const restaurants = useAppSelector(selectRestaurants);
 
-	const currentRestaurant: TRestaurant | null =
-		restaurants.find(({ id }) => id === activeRestaurantId) ?? null;
+	const [activeRestaurantId, setActiveRestaurantId] = useState<string | null>(
+		() => restaurantIds[0] ?? null,
+	);
 
 	const restaurantTabs = restaurants.map(({ id, name }) => ({
 		id,
@@ -34,7 +37,9 @@ export const RestaurantsPage = () => {
 				activeId={activeRestaurantId}
 				onChange={handleSetActiveRestaurantId}
 			/>
-			{currentRestaurant && <RestaurantItem restaurant={currentRestaurant} />}
+			{activeRestaurantId && (
+				<RestaurantContainer id={activeRestaurantId} />
+			)}
 		</div>
 	);
 };
