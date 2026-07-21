@@ -1,10 +1,5 @@
-export type TTabItem = {
-	id: string;
-	label: string;
-};
-
 export type TTabsProps = {
-	items: TTabItem[];
+	itemIds: string[];
 	activeId: string | null;
 	onChange: (id: string) => void;
 };
