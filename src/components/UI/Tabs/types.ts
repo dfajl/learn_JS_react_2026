@@ -1,5 +1,6 @@
 export type TTabsProps = {
 	itemIds: string[];
-	activeId: string | null;
-	onChange: (id: string) => void;
+	activeId?: string | null;
+	onChange?: (id: string) => void;
+	direction?: "row" | "column";
 };

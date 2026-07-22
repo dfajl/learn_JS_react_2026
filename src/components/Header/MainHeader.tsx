@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ProgressBar } from "../UI/ProgressBar/UIProgressBar.tsx";
 import { ThemeSwitch } from "../Providers/ThemeProvider";
 import { UserAuthControls } from "../Providers/UserProvider";
@@ -9,7 +10,9 @@ export const MainHeader = () => {
 			<div className={styles.auth}>
 				<UserAuthControls />
 			</div>
-			<h2 className={styles.title}>Header</h2>
+			<Link to="/" className={styles.title}>
+				MESA
+			</Link>
 			<div className={styles.switch}>
 				<ThemeSwitch />
 			</div>

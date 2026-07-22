@@ -1,25 +1,15 @@
+import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./Providers/ThemeProvider";
 import { UserProvider } from "./Providers/UserProvider";
 import { ReduxProvider } from "./Providers/ReduxProvider";
-import { MainFooter } from "./Footer/MainFooter.tsx";
-import { MainHeader } from "./Header/MainHeader.tsx";
-import { RestaurantsPage } from "./RestaurantList/RestaurantsPage.tsx";
-import { CartContainer } from "./Cart/CartContainer.tsx";
-import styles from "./App.module.css";
+import { router } from "../router.tsx";
 
 export const App = () => {
 	return (
 		<ReduxProvider>
 			<ThemeProvider>
 				<UserProvider>
-					<div className={styles.app}>
-						<MainHeader />
-						<main className={styles.main}>
-							<CartContainer />
-							<RestaurantsPage />
-						</main>
-						<MainFooter />
-					</div>
+					<RouterProvider router={router} />
 				</UserProvider>
 			</ThemeProvider>
 		</ReduxProvider>
