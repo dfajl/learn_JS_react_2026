@@ -1,10 +1,10 @@
 import cn from "classnames";
 import { UIButton } from "../Button/UIButton.tsx";
-import { TabLabel } from "./TabLabel.tsx";
 import type { TTabsProps } from "./types.ts";
 import styles from "./Tabs.module.css";
 
 export const Tabs = ({
+	children,
 	itemIds,
 	activeId = null,
 	onChange,
@@ -25,7 +25,7 @@ export const Tabs = ({
 					aria-selected={id === activeId}
 					onClick={onChange ? () => onChange(id) : undefined}
 				>
-					<TabLabel id={id} />
+					{children(id)}
 				</UIButton>
 			))}
 		</div>
