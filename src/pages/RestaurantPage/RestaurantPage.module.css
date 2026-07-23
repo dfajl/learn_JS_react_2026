@@ -1,0 +1,20 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 24px 16px 40px;
+	max-width: 960px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.back {
+	font-size: 0.95rem;
+	color: #2d6a4f;
+	width: fit-content;
+	transition: color 0.15s;
+}
+
+.back:hover {
+	color: #1b4332;
+}
