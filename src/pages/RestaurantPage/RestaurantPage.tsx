@@ -1,8 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { RestaurantContainer } from "../../components/RestaurantList/RestaurantItem/RestaurantContainer.tsx";
 import styles from "./RestaurantPage.module.css";
 
 export const RestaurantPage = () => {
+	const { id = "" } = useParams();
+
+	if (!id) {
+		return <Navigate to="/" replace />;
+	}
+
 	return (
 		<div className={styles.page}>
 			<Link to="/" className={styles.back}>
