@@ -1,4 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
+import { AppContentLayout } from "./components/Layout/AppContentLayout.tsx";
 import { Layout } from "./components/Layout/Layout.tsx";
 import { HomePage } from "./pages/HomePage/HomePage.tsx";
 import { RestaurantPage } from "./pages/RestaurantPage/RestaurantPage.tsx";
@@ -16,26 +17,31 @@ export const router = createBrowserRouter([
 				element: <HomePage />,
 			},
 			{
-				path: "restaurants/:id",
-				element: <RestaurantPage />,
+				element: <AppContentLayout />,
 				children: [
 					{
-						index: true,
-						element: <Navigate to="menu"/>,
+						path: "restaurants/:id",
+						element: <RestaurantPage />,
+						children: [
+							{
+								index: true,
+								element: <Navigate to="menu" replace />,
+							},
+							{
+								path: "menu",
+								element: <RestaurantMenuPage />,
+							},
+							{
+								path: "reviews",
+								element: <RestaurantReviewsPage />,
+							},
+						],
 					},
 					{
-						path: "menu",
-						element: <RestaurantMenuPage />,
-					},
-					{
-						path: "reviews",
-						element: <RestaurantReviewsPage />,
+						path: "dish/:dishId",
+						element: <DishPage />,
 					},
 				],
-			},
-			{
-				path: "dish/:dishId",
-				element: <DishPage />,
 			},
 		],
 	},
