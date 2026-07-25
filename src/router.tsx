@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage/HomePage.tsx";
 import { RestaurantPage } from "./pages/RestaurantPage/RestaurantPage.tsx";
 import { RestaurantMenuPage } from "./pages/RestaurantPage/RestaurantMenuPage.tsx";
 import { RestaurantReviewsPage } from "./pages/RestaurantPage/RestaurantReviewsPage.tsx";
+import { DishPage } from "./pages/DishPage/DishPage.tsx";
 
 export const router = createBrowserRouter([
 	{
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
 						element: <RestaurantReviewsPage />,
 					},
 				],
+			},
+			{
+				path: "dish/:dishId",
+				element: <DishPage />,
 			},
 		],
 	},

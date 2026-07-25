@@ -7,9 +7,17 @@ export const MenuItem = ({ menuItem }: { menuItem: TDish }) => {
 	const { user } = useUser();
 
 	return (
-		<li className={styles.item}>
-			<span className={styles.name}>{menuItem.name}</span>
-			{user && <DishCounter menuItem={menuItem} />}
-		</li>
+		<article className={styles.card}>
+			<h2 className={styles.name}>{menuItem.name}</h2>
+			<p className={styles.price}>${menuItem.price}</p>
+			<p className={styles.ingredients}>
+				{menuItem.ingredients.join(", ")}
+			</p>
+			{user && (
+				<div className={styles.counter}>
+					<DishCounter menuItem={menuItem} />
+				</div>
+			)}
+		</article>
 	);
 };

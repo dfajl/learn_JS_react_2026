@@ -13,5 +13,5 @@ export const RestaurantMenuPage = () => {
 		return null;
 	}
 
-	return <Menus menuIds={restaurant.menu} />;
+	return <Menus menuIds={restaurant.menu} restaurantId={restaurant.id} />;
 };
