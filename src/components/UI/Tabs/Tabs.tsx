@@ -4,7 +4,7 @@ import type { TTabsProps } from "./types.ts";
 import styles from "./Tabs.module.css";
 
 export const Tabs = ({
-	children,
+	renderTabContent,
 	itemIds,
 	activeId = null,
 	onChange,
@@ -25,7 +25,7 @@ export const Tabs = ({
 					aria-selected={id === activeId}
 					onClick={onChange ? () => onChange(id) : undefined}
 				>
-					{children(id)}
+					{renderTabContent(id)}
 				</UIButton>
 			))}
 		</div>
