@@ -24,6 +24,11 @@
 	color: #1a1a2e;
 }
 
+.status {
+	text-align: center;
+	color: #64748b;
+}
+
 .list {
 	display: flex;
 	flex-direction: column;
