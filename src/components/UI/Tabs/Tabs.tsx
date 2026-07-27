@@ -1,11 +1,20 @@
+import cn from "classnames";
 import { UIButton } from "../Button/UIButton.tsx";
-import { TabLabel } from "./TabLabel.tsx";
 import type { TTabsProps } from "./types.ts";
 import styles from "./Tabs.module.css";
 
-export const Tabs = ({ itemIds, activeId, onChange }: TTabsProps) => {
+export const Tabs = ({
+	renderTabContent,
+	itemIds,
+	activeId = null,
+	onChange,
+	direction = "row",
+}: TTabsProps) => {
 	return (
-		<div role="tablist" className={styles.tablist}>
+		<div
+			role="tablist"
+			className={cn(styles.tablist, styles[direction])}
+		>
 			{itemIds.map((id) => (
 				<UIButton
 					key={id}
@@ -14,9 +23,9 @@ export const Tabs = ({ itemIds, activeId, onChange }: TTabsProps) => {
 					active={id === activeId}
 					role="tab"
 					aria-selected={id === activeId}
-					onClick={() => onChange(id)}
+					onClick={onChange ? () => onChange(id) : undefined}
 				>
-					<TabLabel id={id} />
+					{renderTabContent(id)}
 				</UIButton>
 			))}
 		</div>

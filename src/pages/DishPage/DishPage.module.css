@@ -1,0 +1,20 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+	min-height: calc(100vh - 160px);
+	width: 100%;
+}
+
+.back {
+	align-self: flex-start;
+	font-size: 0.95rem;
+	color: #2d6a4f;
+	transition: color 0.15s;
+}
+
+.back:hover {
+	color: #1b4332;
+}

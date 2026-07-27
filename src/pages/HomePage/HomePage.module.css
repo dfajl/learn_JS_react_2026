@@ -1,0 +1,46 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 24px 16px 40px;
+	max-width: 480px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.brand {
+	font-family: "Bricolage Grotesque", sans-serif;
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-align: center;
+	color: #2d6a4f;
+}
+
+.title {
+	font-size: 1.75rem;
+	font-weight: 700;
+	text-align: center;
+	color: #1a1a2e;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.link {
+	display: block;
+	padding: 10px 16px;
+	border: 1px solid #cbd5e1;
+	border-radius: 8px;
+	background-color: #ffffff;
+	color: #334155;
+	text-align: center;
+	transition: background-color 0.15s, border-color 0.15s;
+}
+
+.link:hover {
+	background-color: #f1f5f9;
+}
