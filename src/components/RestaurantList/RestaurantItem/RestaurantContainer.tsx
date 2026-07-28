@@ -13,7 +13,6 @@ export const RestaurantContainer = () => {
 		data: restaurant,
 		isLoading,
 		isError,
-		isFetching,
 		error,
 	} = useGetRestaurantByIdQuery(id || skipToken);
 
@@ -28,10 +27,6 @@ export const RestaurantContainer = () => {
 
 	if (isError) {
 		return <div>Error: {errorMessage}</div>;
-	}
-
-	if (isFetching) {
-		return <div>Fetching...</div>;
 	}
 
 	if (!restaurant) {

@@ -1,0 +1,35 @@
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: #2563eb;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.link {
+	display: block;
+	padding: 12px 16px;
+	background-color: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 500;
+	color: #334155;
+	transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.link:hover {
+	background-color: #f1f5f9;
+	border-color: #cbd5e1;
+	color: #1e40af;
+}
