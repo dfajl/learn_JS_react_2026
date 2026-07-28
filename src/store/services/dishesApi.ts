@@ -12,11 +12,13 @@ export const dishesApi = api.injectEndpoints({
 				{ type: "Dish", id: restaurantId },
 			],
 		}),
-		/* getDishById: builder.query<TDish, string>({
-			query: (id) => `/dish/${id}`,
-			providesTags: (_result, _error, id) => [{ type: "Dish", id }],
-		}), */
+		getDishById: builder.query<TDish, string>({
+			query: (dishId) => `/dish/${dishId}`,
+			providesTags: (_result, _error, dishId) => [
+				{ type: "Dish", id: dishId },
+			],
+		}),
 	}),
 });
 
-export const { useGetDishesQuery } = dishesApi;
+export const { useGetDishesQuery, useGetDishByIdQuery } = dishesApi;
