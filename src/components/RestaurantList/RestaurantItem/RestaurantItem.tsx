@@ -10,8 +10,18 @@ const LINKS = [
 
 export const RestaurantItem = ({ restaurant }: { restaurant: TRestaurant }) => {
 	return (
-		<div className={styles.restaurant}>
-			<h2 className={styles.name}>Name: {restaurant.name}</h2>
+		<article className={styles.restaurant}>
+			<div className={styles.hero}>
+				<img
+					src={restaurant.img}
+					alt={restaurant.name}
+					className={styles.image}
+				/>
+				<div className={styles.meta}>
+					<h2 className={styles.name}>{restaurant.name}</h2>
+					<p className={styles.description}>{restaurant.description}</p>
+				</div>
+			</div>
 			<nav className={styles.nav}>
 				{LINKS.map(({ to, label }) => (
 					<NavLink
@@ -26,6 +36,6 @@ export const RestaurantItem = ({ restaurant }: { restaurant: TRestaurant }) => {
 				))}
 			</nav>
 			<Outlet />
-		</div>
+		</article>
 	);
 };
