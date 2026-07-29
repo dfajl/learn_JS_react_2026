@@ -17,28 +17,37 @@ export const ReviewForm = ({
 		clear,
 	} = useForm();
 
-	const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
+	const [addReview, { isLoading: isSubmitting, isError, error, isSuccess }] = useAddReviewMutation();
 	const { user } = useUser();
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		addReview({
-			restaurantId,
-			review: {
-				userId: user?.id ?? "",
-				text: form.text,
-				rating: form.rating,
-			},
-		});
+		try {
+			await addReview({
+				restaurantId,
+				review: {
+					userId: user?.id ?? "",
+					text: form.text,
+					rating: form.rating,
+				},
+			}).unwrap();
 
-		clear();
+			clear();
+		} catch(error: unknown) {
+			console.error(error);
+		}
 	};
 
+	const isFormEmpty = !form.name.trim() || !form.text.trim();
+    const isActionsDisabled = isFormEmpty || isSubmitting;
+
+	const errorMessage =
+		typeof error === "object" && error !== null && "status" in error
+			? `Request failed (${String(error.status)})`
+			: "Failed to add review";
+
 	return (
-		isSubmitting ? (
-			<div>Submitting...</div>
-		) : (
 		<form className={styles.form} onSubmit={handleSubmit}>
 			<div className={styles.row}>
 				<label htmlFor="review-name" className={styles.label}>
@@ -75,12 +84,15 @@ export const ReviewForm = ({
 				/>
 			</div>
 
+			{isError && !isSubmitting && <div className={styles.error}>{errorMessage}</div>}
+			{isSuccess && !isSubmitting && <div className={styles.success}>Review added successfully</div>}
+
 			<div className={styles.actions}>
 				<UIButton
 					size="large"
 					color="danger"
 					onClick={clear}
-					disabled={isSubmitting}
+					disabled={isActionsDisabled}
 				>
 					Clear
 				</UIButton>
@@ -88,13 +100,12 @@ export const ReviewForm = ({
 					type="submit"
 					size="large"
 					color="primary"
-					disabled={isSubmitting}
+					disabled={isActionsDisabled}
 				>
-					Submit
+					{isSubmitting ? "Submitting..." : "Submit"}
 				</UIButton>
 			</div>
 		</form>
-		)
 	);
 };
 
