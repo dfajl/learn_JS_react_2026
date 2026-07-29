@@ -8,7 +8,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [currentUser, setCurrentUser] = useState<TUser | null>(null);
 
 	const signIn = (name = MOCK_USER_NAME) => {
-		setCurrentUser({ name });
+		setCurrentUser({ name, id: "1" });
 	};
 
 	const signOut = () => {

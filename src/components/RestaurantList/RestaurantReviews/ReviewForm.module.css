@@ -50,6 +50,7 @@
 .actions {
 	display: flex;
 	justify-content: center;
+	gap: 16px;
 	padding-top: 8px;
 	margin-top: 4px;
 	border-top: 1px solid #e2e8f0;

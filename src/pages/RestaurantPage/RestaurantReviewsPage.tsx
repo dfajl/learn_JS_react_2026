@@ -43,5 +43,11 @@ export const RestaurantReviewsPage = () => {
 		(clients ?? []).map((client) => [client.id, client.name]),
 	);
 
-	return <Reviews reviews={reviews} clientsById={clientsById} />;
+	return (
+		<Reviews
+			reviews={reviews}
+			clientsById={clientsById}
+			restaurantId={id}
+		/>
+	);
 };

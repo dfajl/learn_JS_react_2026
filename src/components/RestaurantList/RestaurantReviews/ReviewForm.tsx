@@ -2,12 +2,44 @@ import { UIButton } from "../../UI/Button/UIButton.tsx";
 import { Counter } from "../../UI/Counter/UICounter.tsx";
 import { useForm } from "./useForm.ts";
 import styles from "./ReviewForm.module.css";
+import { useAddReviewMutation } from "../../../store/services/reviewsApi.ts";
+import { useUser } from "../../Providers/UserProvider/useUser.ts";
 
-export const ReviewForm = () => {
-	const { form, setName, setText, setRating, clear } = useForm();
+export const ReviewForm = ({
+	restaurantId,
+}: {
+	restaurantId: string;
+}) => {
+	const { form,
+		setName,
+		setText,
+		setRating,
+		clear,
+	} = useForm();
+
+	const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
+	const { user } = useUser();
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		addReview({
+			restaurantId,
+			review: {
+				userId: user?.id ?? "",
+				text: form.text,
+				rating: form.rating,
+			},
+		});
+
+		clear();
+	};
 
 	return (
-		<form className={styles.form}>
+		isSubmitting ? (
+			<div>Submitting...</div>
+		) : (
+		<form className={styles.form} onSubmit={handleSubmit}>
 			<div className={styles.row}>
 				<label htmlFor="review-name" className={styles.label}>
 					Name:
@@ -44,10 +76,25 @@ export const ReviewForm = () => {
 			</div>
 
 			<div className={styles.actions}>
-				<UIButton size="large" color="danger" onClick={clear}>
+				<UIButton
+					size="large"
+					color="danger"
+					onClick={clear}
+					disabled={isSubmitting}
+				>
 					Clear
+				</UIButton>
+				<UIButton
+					type="submit"
+					size="large"
+					color="primary"
+					disabled={isSubmitting}
+				>
+					Submit
 				</UIButton>
 			</div>
 		</form>
+		)
 	);
 };
+

@@ -7,9 +7,11 @@ import styles from "./Reviews.module.css";
 export const Reviews = ({
 	reviews,
 	clientsById,
+	restaurantId,
 }: {
 	reviews: TReview[];
 	clientsById: Record<string, string>;
+	restaurantId: string;
 }) => {
 	const { user } = useUser();
 
@@ -25,7 +27,9 @@ export const Reviews = ({
 					/>
 				))}
 			</ul>
-			{user && <ReviewForm />}
+			{user && (
+				<ReviewForm restaurantId={restaurantId} />
+			)}
 		</div>
 	);
 };
