@@ -1,17 +1,28 @@
 import { useUser } from "../../Providers/UserProvider";
-import { ReviewContainer } from "./ReviewContainer.tsx";
 import { ReviewForm } from "./ReviewForm.tsx";
+import { ReviewItem } from "./ReviewItem.tsx";
+import type { TReview } from "../restaurantTypes.ts";
 import styles from "./Reviews.module.css";
 
-export const Reviews = ({ reviewIds }: { reviewIds: string[] }) => {
+export const Reviews = ({
+	reviews,
+	clientsById,
+}: {
+	reviews: TReview[];
+	clientsById: Record<string, string>;
+}) => {
 	const { user } = useUser();
 
 	return (
 		<div className={styles.section}>
 			<h3 className={styles.title}>Reviews</h3>
 			<ul className={styles.list}>
-				{reviewIds.map((id) => (
-					<ReviewContainer key={id} id={id} />
+				{reviews.map((review) => (
+					<ReviewItem
+						key={review.id}
+						review={review}
+						userName={clientsById[review.userId] ?? "Unknown"}
+					/>
 				))}
 			</ul>
 			{user && <ReviewForm />}
