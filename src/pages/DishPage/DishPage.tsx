@@ -1,14 +1,26 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { MenuItem } from "../../components/RestaurantList/RestaurantMenus/MenuItem.tsx";
-import { selectDishById } from "../../store/entities/dish/slice.ts";
-import { useAppSelector } from "../../store/hooks.ts";
 import styles from "./DishPage.module.css";
+import { useGetDishByIdQuery } from "../../store/services/dishesApi.ts";
 
 export const DishPage = () => {
 	const { dishId = "" } = useParams();
 	const { restaurantId } = useLocation().state ?? {};
 
-	const dish = useAppSelector((state) => selectDishById(state, dishId));
+	const { data: dish, isLoading, isError, error } = useGetDishByIdQuery(dishId);
+
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
+
+	const errorMessage =
+		typeof error === "object" && error !== null && "status" in error
+			? `Request failed (${String(error.status)})`
+			: "Failed to load dish";
+
+	if (isError) {
+		return <div>Error: {errorMessage}</div>;
+	}
 
 	if (!dish) {
 		return null;

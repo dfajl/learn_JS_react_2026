@@ -2,12 +2,53 @@ import { UIButton } from "../../UI/Button/UIButton.tsx";
 import { Counter } from "../../UI/Counter/UICounter.tsx";
 import { useForm } from "./useForm.ts";
 import styles from "./ReviewForm.module.css";
+import { useAddReviewMutation } from "../../../store/services/reviewsApi.ts";
+import { useUser } from "../../Providers/UserProvider/useUser.ts";
 
-export const ReviewForm = () => {
-	const { form, setName, setText, setRating, clear } = useForm();
+export const ReviewForm = ({
+	restaurantId,
+}: {
+	restaurantId: string;
+}) => {
+	const { form,
+		setName,
+		setText,
+		setRating,
+		clear,
+	} = useForm();
+
+	const [addReview, { isLoading: isSubmitting, isError, error, isSuccess }] = useAddReviewMutation();
+	const { user } = useUser();
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		try {
+			await addReview({
+				restaurantId,
+				review: {
+					userId: user?.id ?? "",
+					text: form.text,
+					rating: form.rating,
+				},
+			}).unwrap();
+
+			clear();
+		} catch(error: unknown) {
+			console.error(error);
+		}
+	};
+
+	const isFormEmpty = !form.name.trim() || !form.text.trim();
+    const isActionsDisabled = isFormEmpty || isSubmitting;
+
+	const errorMessage =
+		typeof error === "object" && error !== null && "status" in error
+			? `Request failed (${String(error.status)})`
+			: "Failed to add review";
 
 	return (
-		<form className={styles.form}>
+		<form className={styles.form} onSubmit={handleSubmit}>
 			<div className={styles.row}>
 				<label htmlFor="review-name" className={styles.label}>
 					Name:
@@ -43,11 +84,28 @@ export const ReviewForm = () => {
 				/>
 			</div>
 
+			{isError && !isSubmitting && <div className={styles.error}>{errorMessage}</div>}
+			{isSuccess && !isSubmitting && <div className={styles.success}>Review added successfully</div>}
+
 			<div className={styles.actions}>
-				<UIButton size="large" color="danger" onClick={clear}>
+				<UIButton
+					size="large"
+					color="danger"
+					onClick={clear}
+					disabled={isActionsDisabled}
+				>
 					Clear
+				</UIButton>
+				<UIButton
+					type="submit"
+					size="large"
+					color="primary"
+					disabled={isActionsDisabled}
+				>
+					{isSubmitting ? "Submitting..." : "Submit"}
 				</UIButton>
 			</div>
 		</form>
 	);
 };
+
