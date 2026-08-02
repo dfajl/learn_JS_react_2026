@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useUser } from "../../Providers/UserProvider";
 import { ReviewForm } from "./ReviewForm.tsx";
 import { ReviewItem } from "./ReviewItem.tsx";
@@ -14,6 +15,7 @@ export const Reviews = ({
 	restaurantId: string;
 }) => {
 	const { user } = useUser();
+	const [editingReview, setEditingReview] = useState<TReview | null>(null);
 
 	return (
 		<div className={styles.section}>
@@ -24,11 +26,22 @@ export const Reviews = ({
 						key={review.id}
 						review={review}
 						userName={clientsById[review.userId] ?? "Unknown"}
+						canEdit={Boolean(user)}
+						onEdit={setEditingReview}
 					/>
 				))}
 			</ul>
 			{user && (
-				<ReviewForm restaurantId={restaurantId} />
+				<ReviewForm
+					restaurantId={restaurantId}
+					editingReview={editingReview}
+					authorName={
+						editingReview
+							? clientsById[editingReview.userId]
+							: user.name
+					}
+					onCancelEdit={() => setEditingReview(null)}
+				/>
 			)}
 		</div>
 	);

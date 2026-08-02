@@ -7,7 +7,10 @@ const INITIAL_STATE: TReviewFormState = {
 	rating: 1,
 };
 
-const reducer = (state: TReviewFormState, action: TReviewFormAction): TReviewFormState => {
+const reducer = (
+	state: TReviewFormState,
+	action: TReviewFormAction,
+): TReviewFormState => {
 	switch (action.type) {
 		case "SET_NAME":
 			return { ...state, name: action.payload };
@@ -15,6 +18,8 @@ const reducer = (state: TReviewFormState, action: TReviewFormAction): TReviewFor
 			return { ...state, text: action.payload };
 		case "SET_RATING":
 			return { ...state, rating: action.payload };
+		case "RESET":
+			return { ...action.payload };
 		case "CLEAR":
 			return { ...INITIAL_STATE };
 		default:
@@ -37,8 +42,11 @@ export const useForm = () => {
 		(value: number) => dispatch({ type: "SET_RATING", payload: value }),
 		[],
 	);
+	const reset = useCallback(
+		(value: TReviewFormState) => dispatch({ type: "RESET", payload: value }),
+		[],
+	);
 	const clear = useCallback(() => dispatch({ type: "CLEAR" }), []);
 
-	return { form, setName, setText, setRating, clear };
+	return { form, setName, setText, setRating, reset, clear };
 };
-

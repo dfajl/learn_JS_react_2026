@@ -25,7 +25,28 @@ export const reviewsApi = api.injectEndpoints({
 				{ type: "Review", id: restaurantId },
 			],
 		}),
+		updateReview: builder.mutation<
+			TReview,
+			{
+				reviewId: string;
+				restaurantId: string;
+				review: Partial<Omit<TReview, "id">>;
+			}
+		>({
+			query: ({ reviewId, review }) => ({
+				url: `/review/${reviewId}`,
+				method: "PATCH",
+				body: review,
+			}),
+			invalidatesTags: (_result, _error, { restaurantId }) => [
+				{ type: "Review", id: restaurantId },
+			],
+		}),
 	}),
 });
 
-export const { useGetReviewsQuery, useAddReviewMutation } = reviewsApi;
+export const {
+	useGetReviewsQuery,
+	useAddReviewMutation,
+	useUpdateReviewMutation,
+} = reviewsApi;
