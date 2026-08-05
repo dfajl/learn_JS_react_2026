@@ -3,39 +3,38 @@ import { UIButton } from "../../UI/Button/UIButton.tsx";
 import { Counter } from "../../UI/Counter/UICounter.tsx";
 import { useForm } from "./useForm.ts";
 import styles from "./ReviewForm.module.css";
-import {
-	useAddReviewMutation,
-	useUpdateReviewMutation,
-} from "../../../store/services/reviewsApi.ts";
-import { useUser } from "../../Providers/UserProvider/useUser.ts";
 import type { TReview } from "../restaurantTypes.ts";
+import type { TReviewFormState } from "./types.ts";
 
 export const ReviewForm = ({
-	restaurantId,
 	editingReview,
 	authorName,
+	defaultAuthorName,
+	onSubmit,
 	onCancelEdit,
+	isSubmitting,
+	isError,
+	isSuccess,
+	errorMessage,
 }: {
-	restaurantId: string;
 	editingReview?: TReview | null;
 	authorName?: string;
+	defaultAuthorName?: string;
+	onSubmit: (form: TReviewFormState) => Promise<void>;
 	onCancelEdit?: () => void;
+	isSubmitting: boolean;
+	isError: boolean;
+	isSuccess: boolean;
+	errorMessage: string;
 }) => {
 	const { form, setName, setText, setRating, reset, clear } = useForm();
-	const [addReview, addState] = useAddReviewMutation();
-	const [updateReview, updateState] = useUpdateReviewMutation();
-	const { user } = useUser();
 
 	const isEditing = Boolean(editingReview);
-	const isSubmitting = addState.isLoading || updateState.isLoading;
-	const isError = isEditing ? updateState.isError : addState.isError;
-	const isSuccess = isEditing ? updateState.isSuccess : addState.isSuccess;
-	const error = isEditing ? updateState.error : addState.error;
 
 	useEffect(() => {
 		if (editingReview) {
 			reset({
-				name: authorName ?? user?.name ?? "",
+				name: authorName ?? defaultAuthorName ?? "",
 				text: editingReview.text,
 				rating: editingReview.rating,
 			});
@@ -43,33 +42,13 @@ export const ReviewForm = ({
 		}
 
 		clear();
-	}, [editingReview, authorName, user?.name, reset, clear]);
+	}, [editingReview, authorName, defaultAuthorName, reset, clear]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		try {
-			if (editingReview) {
-				await updateReview({
-					reviewId: editingReview.id,
-					restaurantId,
-					review: {
-						text: form.text,
-						rating: form.rating,
-					},
-				}).unwrap();
-				onCancelEdit?.();
-			} else {
-				await addReview({
-					restaurantId,
-					review: {
-						userId: user?.id ?? "",
-						text: form.text,
-						rating: form.rating,
-					},
-				}).unwrap();
-			}
-
+			await onSubmit(form);
 			clear();
 		} catch (err: unknown) {
 			console.error(err);
@@ -78,13 +57,6 @@ export const ReviewForm = ({
 
 	const isFormEmpty = !form.name.trim() || !form.text.trim();
 	const isActionsDisabled = isFormEmpty || isSubmitting;
-
-	const errorMessage =
-		typeof error === "object" && error !== null && "status" in error
-			? `Request failed (${String(error.status)})`
-			: isEditing
-				? "Failed to update review"
-				: "Failed to add review";
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
@@ -127,7 +99,7 @@ export const ReviewForm = ({
 			{isError && !isSubmitting && (
 				<div className={styles.error}>{errorMessage}</div>
 			)}
-			
+
 			{isSuccess && !isSubmitting && (
 				<div className={styles.success}>
 					{isEditing
