@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { UIButton } from "../../UI/Button/UIButton.tsx";
 import { Counter } from "../../UI/Counter/UICounter.tsx";
 import { useForm } from "./useForm.ts";
@@ -27,22 +26,17 @@ export const ReviewForm = ({
 	isSuccess: boolean;
 	errorMessage: string;
 }) => {
-	const { form, setName, setText, setRating, reset, clear } = useForm();
-
 	const isEditing = Boolean(editingReview);
 
-	useEffect(() => {
-		if (editingReview) {
-			reset({
+	const initialState: TReviewFormState = isEditing
+		? {
 				name: authorName ?? defaultAuthorName ?? "",
-				text: editingReview.text,
-				rating: editingReview.rating,
-			});
-			return;
-		}
+				text: editingReview!.text,
+				rating: editingReview!.rating,
+			}
+		: { name: "", text: "", rating: 1 };
 
-		clear();
-	}, [editingReview, authorName, defaultAuthorName, reset, clear]);
+	const { form, setName, setText, setRating, clear } = useForm(initialState);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

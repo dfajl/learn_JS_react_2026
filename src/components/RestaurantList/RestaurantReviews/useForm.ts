@@ -27,8 +27,8 @@ const reducer = (
 	}
 };
 
-export const useForm = () => {
-	const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
+export const useForm = (initialState: TReviewFormState = INITIAL_STATE) => {
+	const [form, dispatch] = useReducer(reducer, initialState);
 
 	const setName = useCallback(
 		(value: string) => dispatch({ type: "SET_NAME", payload: value }),

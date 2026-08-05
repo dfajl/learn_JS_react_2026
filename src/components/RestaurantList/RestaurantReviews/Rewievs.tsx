@@ -77,6 +77,11 @@ export const Reviews = ({
 			</ul>
 			{user && (
 				<ReviewForm
+					key={
+						editingReview
+							? `edit-${editingReview.id}`
+							: `create-${user.id}`
+					}
 					editingReview={editingReview}
 					authorName={
 						editingReview
