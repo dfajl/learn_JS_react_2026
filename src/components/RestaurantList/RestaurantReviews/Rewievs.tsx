@@ -70,7 +70,7 @@ export const Reviews = ({
 						key={review.id}
 						review={review}
 						userName={clientsById[review.userId] ?? "Unknown"}
-						canEdit={Boolean(user)}
+						canEdit={Boolean(user) && review.userId === user?.id}
 						onEdit={setEditingReview}
 					/>
 				))}
