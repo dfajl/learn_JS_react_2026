@@ -48,5 +48,12 @@ export const useForm = (initialState: TReviewFormState = INITIAL_STATE) => {
 	);
 	const clear = useCallback(() => dispatch({ type: "CLEAR" }), []);
 
-	return { form, setName, setText, setRating, reset, clear };
+	return { 
+		form,
+		setName,
+		setText,
+		setRating,
+		reset,
+		clear,
+	};
 };

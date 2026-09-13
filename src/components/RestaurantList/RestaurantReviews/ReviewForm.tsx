@@ -36,7 +36,13 @@ export const ReviewForm = ({
 			}
 		: { name: "", text: "", rating: 1 };
 
-	const { form, setName, setText, setRating, clear } = useForm(initialState);
+	const {
+		form,
+		setName,
+		setText,
+		setRating,
+		clear,
+	} = useForm(initialState);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
