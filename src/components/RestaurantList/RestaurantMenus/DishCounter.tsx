@@ -16,7 +16,13 @@ export const DishCounter = ({ menuItem }: { menuItem: TDish }) => {
 
 	const handleChange = (nextAmount: number) => {
 		if (nextAmount > amount) {
-			dispatch(addToCart(menuItem.id));
+			dispatch(
+				addToCart({
+					id: menuItem.id,
+					name: menuItem.name,
+					price: menuItem.price,
+				}),
+			);
 			return;
 		}
 

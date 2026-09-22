@@ -3,8 +3,11 @@ import {
 	createSelector,
 	type PayloadAction,
 } from "@reduxjs/toolkit";
+import type { TDish } from "../../../components/RestaurantList/restaurantTypes.ts";
+import type { TCartListItem } from "../../../components/Cart/types.ts";
 
-type TCartState = Record<string, number>;
+type TCartDish = Pick<TDish, "id" | "name" | "price">;
+type TCartState = Record<string, { dish: TCartDish; amount: number }>;
 
 const initialState: TCartState = {};
 
@@ -12,17 +15,26 @@ export const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		addToCart: (state, { payload }: PayloadAction<string>) => {
-			state[payload] = (state[payload] || 0) + 1;
-		},
-		removeFromCart: (state, { payload }: PayloadAction<string>) => {
-			if (!state[payload]) {
+		addToCart: (state, { payload }: PayloadAction<TCartDish>) => {
+			const item = state[payload.id];
+
+			if (item) {
+				item.amount += 1;
 				return;
 			}
 
-			state[payload] -= 1;
+			state[payload.id] = { dish: payload, amount: 1 };
+		},
+		removeFromCart: (state, { payload }: PayloadAction<string>) => {
+			const item = state[payload];
 
-			if (state[payload] === 0) {
+			if (!item) {
+				return;
+			}
+
+			item.amount -= 1;
+
+			if (item.amount === 0) {
 				delete state[payload];
 			}
 		},
@@ -30,13 +42,13 @@ export const cartSlice = createSlice({
 	selectors: {
 		selectCartItems: createSelector(
 			[(state: TCartState) => state],
-			(cart) =>
-				Object.keys(cart).map((id) => ({
-					id,
-					amount: cart[id],
+			(cart): TCartListItem[] =>
+				Object.values(cart).map(({ dish, amount }) => ({
+					...dish,
+					amount,
 				})),
 		),
-		selectAmountById: (state, id: string) => state[id] || 0,
+		selectAmountById: (state, id: string) => state[id]?.amount ?? 0,
 	},
 });
 
