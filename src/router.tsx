@@ -1,16 +1,16 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
-import { AppContentLayout } from "./components/Layout/AppContentLayout.tsx";
-import { Layout } from "./components/Layout/Layout.tsx";
-import { HomePage } from "./pages/HomePage/HomePage.tsx";
-import { RestaurantPage } from "./pages/RestaurantPage/RestaurantPage.tsx";
-import { RestaurantMenuPage } from "./pages/RestaurantPage/RestaurantMenuPage.tsx";
-import { RestaurantReviewsPage } from "./pages/RestaurantPage/RestaurantReviewsPage.tsx";
-import { DishPage } from "./pages/DishPage/DishPage.tsx";
-import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage.tsx";
+import { Navigate, createBrowserRouter } from 'react-router-dom';
+import { AppContentLayout } from './components/Layout/AppContentLayout.tsx';
+import { Layout } from './components/Layout/Layout.tsx';
+import { HomePage } from './pages/HomePage/HomePage.tsx';
+import { RestaurantPage } from './pages/RestaurantPage/RestaurantPage.tsx';
+import { RestaurantMenuPage } from './pages/RestaurantPage/RestaurantMenuPage.tsx';
+import { RestaurantReviewsPage } from './pages/RestaurantPage/RestaurantReviewsPage.tsx';
+import { DishPage } from './pages/DishPage/DishPage.tsx';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage.tsx';
 
 export const router = createBrowserRouter([
 	{
-		path: "/",
+		path: '/',
 		element: <Layout />,
 		children: [
 			{
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
 				element: <AppContentLayout />,
 				children: [
 					{
-						path: "restaurants/:id",
+						path: 'restaurants/:id',
 						element: <RestaurantPage />,
 						children: [
 							{
@@ -29,25 +29,25 @@ export const router = createBrowserRouter([
 								element: <Navigate to="menu" replace />,
 							},
 							{
-								path: "menu",
+								path: 'menu',
 								element: <RestaurantMenuPage />,
 							},
 							{
-								path: "reviews",
+								path: 'reviews',
 								element: <RestaurantReviewsPage />,
 							},
 						],
 					},
 					{
-						path: "dish/:dishId",
+						path: 'dish/:dishId',
 						element: <DishPage />,
-				},
-			],
-		},
-		{
-			path: "*",
-			element: <NotFoundPage />,
-		},
-	],
+					},
+				],
+			},
+			{
+				path: '*',
+				element: <NotFoundPage />,
+			},
+		],
 	},
 ]);
