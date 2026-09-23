@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const api = createApi({
+export const rtkQueryApi = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api" }),
 	tagTypes: ["Restaurant", "Dish", "Review", "Clients"],

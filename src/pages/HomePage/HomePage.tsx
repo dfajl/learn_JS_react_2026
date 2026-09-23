@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks.ts";
 import {
-	fetchRestaurants,
 	selectRestaurantIds,
 	selectRestaurantsError,
 	selectRestaurantsStatus,
 } from "../../store/entities/restaurant/slice.ts";
+import { fetchRestaurants } from "../../store/entities/restaurant/thunks.ts";
 import { RestaurantLabel } from "../../components/RestaurantList/RestaurantItem/RestaurantLabel.tsx";
+import { UIButton } from "../../components/UI/Button/UIButton.tsx";
 import styles from "./HomePage.module.css";
 
 export const HomePage = () => {
@@ -22,6 +23,10 @@ export const HomePage = () => {
 		}
 	}, [dispatch, status]);
 
+	const handleRetry = () => {
+		dispatch(fetchRestaurants());
+	};
+
 	return (
 		<div className={styles.page}>
 			<p className={styles.brand}>MESA</p>
@@ -29,7 +34,14 @@ export const HomePage = () => {
 
 			{status === "pending" && <p className={styles.status}>Loading...</p>}
 			{status === "rejected" && (
-				<p className={styles.status}>{error ?? "Failed to load restaurants"}</p>
+				<>
+					<p className={styles.status}>
+						{error ?? "Failed to load restaurants"}
+					</p>
+					<UIButton color="neutral" onClick={handleRetry}>
+						Try again
+					</UIButton>
+				</>
 			)}
 
 			{status === "fulfilled" && (

@@ -1,33 +1,12 @@
 import {
-	createAsyncThunk,
 	createEntityAdapter,
 	createSlice,
 } from "@reduxjs/toolkit";
 import type { TRestaurant } from "../../../components/RestaurantList/restaurantTypes.ts";
 import type { RootState } from "../../redux.ts";
+import { fetchRestaurants } from "./thunks.ts";
 
 const restaurantAdapter = createEntityAdapter<TRestaurant>();
-
-export const fetchRestaurants = createAsyncThunk<
-	TRestaurant[],
-	void,
-	{ rejectValue: string }
->("restaurant/fetchRestaurants", async (_, thunkApi) => {
-	try {
-		const response = await fetch("/api/restaurants");
-
-		if (!response.ok) {
-			throw new Error("Failed to fetch restaurants");
-		}
-
-		return (await response.json()) as TRestaurant[];
-	} catch (error) {
-		const message =
-			error instanceof Error ? error.message : "Unknown request error";
-
-		return thunkApi.rejectWithValue(message);
-	}
-});
 
 const initialState = restaurantAdapter.getInitialState({
 	status: "idle" as "idle" | "pending" | "fulfilled" | "rejected",

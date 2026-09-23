@@ -1,7 +1,7 @@
-import { api } from "./api.ts";
+import { rtkQueryApi } from "./rtkQueryApi.ts";
 import type { TReview } from "../../components/RestaurantList/restaurantTypes.ts";
 
-export const reviewsApi = api.injectEndpoints({
+export const reviewsApi = rtkQueryApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getReviews: builder.query<TReview[], string>({
 			query: (restaurantId) => ({
